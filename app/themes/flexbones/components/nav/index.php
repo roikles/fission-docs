@@ -11,23 +11,14 @@
 ?>
 
 <nav class="sidebar__nav">
-
     <?php foreach( $terms as $term ) : ?>
-        
-        <?php $term_anchor = str_replace( ' ', '-', $term->name ); ?>
-        <?php $title_anchor = str_replace( ' ', '_', get_the_title() ); ?>
-
-        <h2 id="<?php echo $term_anchor ?>" class="fs2 c-white m0"><?php echo $term->name; ?></h2>
+        <?php $term_anchor = strtolower( str_replace( ' ', '-', $term->name ) ); ?>
+        <h2 id="<?php echo $term_anchor; ?>" class="fs2 c-white m0"><?php echo $term->name; ?></h2>
         <ul class="list">
             <?php if($nav->have_posts()): while($nav->have_posts()): $nav->the_post(); ?>
-                <li>
-                    <a class="c-brand-blue" href="#<?php echo $title_anchor ?>">
-                        <?php the_title(); ?>
-                    </a>
-                </li>
+                <?php $title_anchor = strtolower( str_replace( ' ', '_', get_the_title() ) ); ?>
+                <li><a class="c-brand-blue" href="#<?php echo $title_anchor; ?>"><?php the_title(); ?></a></li>
             <?php endwhile; endif; ?>
         </ul>
-
     <?php endforeach; ?>
-
 </nav>
